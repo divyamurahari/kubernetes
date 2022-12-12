@@ -1,0 +1,32 @@
+  1  yum install docker -y && service docker start
+    2  yum install git -y
+    3  cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+    
+    cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://packages.cloud.google.com/yum/repos/kubernetes-el7-\$basearch
+enabled=1
+gpgcheck=1
+gpgkey=https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
+EOF
+sudo yum install -y kubectl
+
+#Ref: https://minikube.sigs.k8s.io/docs/start/  #
+
+
+curl -LO https://storage.googleapis.com/minikube/releases/latest/minikube-linux-amd64
+sudo install minikube-linux-amd64 /usr/local/bin/minikube
+
+sudo cp /usr/local/bin/minikube /usr/bin/
+
+is it showing root user previlege error try creating new user and add into docker group
+
+adduser newUser
+usermod -aG sudo newUser
+su - newUser
+
+login into new user and then use :
+minikube start --driver docker
+
+
